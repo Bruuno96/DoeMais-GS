@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.com"
+                xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../Style/nav-bar.css" th:href="@{/style/nav-bar.css}">
+    <link rel="stylesheet" href="../Style/estilo-lista-eventos.css" th:href="@{/style/estilo-lista-eventos.css}">
+    <link rel="stylesheet" href="../Style/footer.css" th:href="@{/style/footer.css}">
+</head>
+
+<body>
+
+    <nav>
+        <a class="logo" href="/index"><img th:src="@{/images/doemais.png}" th:style="'margin-top:1.5rem; width:13rem;'"></a>
+       
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+            <li><a href="/index">Início</a></li>
+            <li><a href="/produtos">Produtos</a></li>
+            <li><a href="/pedidos" sec:authorize="hasRole('ROLE_ONG')">Meus pedidos</a></li>
+            <li><a href="/parceiros">Parceiros</a></li>
+            <li><a href="/cadastro-produto" sec:authorize="hasRole('ROLE_BUSINESS')">Cadastrar Produtos</a></li>
+        </ul>
+
+        <ul>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div style="background-color: #FFFF;">
+
+        <div class="evento-destaque" th:style="'background: url(/images/banner-doacao.jpg); object-fit: cover;'">
+
+        </div>
+
+        <div style="display:flex; justify-content: center; align-items: center;">
+            <hr style="margin: 1.5rem; width: 30%">
+
+            <h3>Empresas Parceiras</h3>
+
+            <hr th:style="'margin: 1.5rem; width: 30%'">
+
+
+        </div>
+
+        <div style="display:flex; justify-content: center;">
+
+            <div class="divEvento" th:each="business : ${business}">
+                   <img th:src="@{/images/empresa-1.png}" class="img-responsive">
+                <ul>
+                    <li th:text="${business.name}"></li>
+                    <li class="local" th:text="${business.products.size}"></li>
+                    <li>
+                        <a href="/more-Details-partner">Mais detalhes</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <footer>
+
+        <div class="div-1">About</div>
+
+        <div class="div-2">Nosso patrocinios</div>
+
+        <div class="div-3">Pages</div>
+
+    </footer>
+
+
+
+
+    <script src="../Javascript/nav-bar.js" th:href="@{/Javascript/nav-bar.js}"></script>
+
+</body>
+
+</html>
